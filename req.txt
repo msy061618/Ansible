@@ -1,0 +1,5 @@
+# Anisble Installation in ubuntu
+
+sudo apt-add-repository ppa:ansible/ansible
+
+sudo apt update

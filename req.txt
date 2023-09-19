@@ -3,3 +3,21 @@
 sudo apt-add-repository ppa:ansible/ansible
 
 sudo apt update
+
+sudo apt install ansible
+
+
+# Ansibel installation in Amazon Linux 2
+
+sudo yum update -y
+
+sudo amazon-linux-extras install ansible2 -y
+
+# aws cli installation
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+
+sudo vim /etc/ssh/sshd_config

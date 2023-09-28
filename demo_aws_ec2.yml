@@ -1,0 +1,12 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-east-1
+hostnames:
+  - name: 'private-ip-address'
+keyed_groups:
+  - key: tags.os
+    prefix: tag_Os_
+    separator: ""
+    
+compose:
+  ansible_host: private_ip_address

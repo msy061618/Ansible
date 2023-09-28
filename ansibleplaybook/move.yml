@@ -10,6 +10,6 @@
         state: absent
     - name: Synchronize the directory
       synchronize:
-        src: /home/ubuntu/ansible/html/
+        src: /home/ubuntu/ansible/service_status.csv
         dest: /var/www/html/
         mode: pull  # To copy from the source server to the control machine

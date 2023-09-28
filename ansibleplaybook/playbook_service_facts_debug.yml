@@ -1,0 +1,21 @@
+---
+- name: Taking service status from all servers
+  hosts: tag_Os_ubuntu
+  gather_facts: yes
+  become: yes
+
+  tasks:
+
+    - name: Gathering service facts
+      service_facts:
+
+    - name: print the service_facts
+      debug:
+        var: ansible_facts.services
+    
+    - name: save service facts as csv
+      read_csv:
+        path: /home/ubunt/service_facts1.csv
+        header: Service Name,Status
+        lines:
+          - "{{ ansible_facts.services | dict2items | selectattr('value.state', 'defined') | map(attribute='key,value.state') | list }}"

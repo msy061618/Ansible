@@ -1,0 +1,15 @@
+---
+- name: Ec2_cretion using ansibleplaybook
+  hosts: tag_Os_ubuntu
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Gathering service facts
+      service_facts:
+      register: service_info
+    
+    - name: save service facts as json
+      copy:        
+        content: "{{ service_info.ansible_facts.services | to_json }}"
+        dest: /home/ubuntu/ansible/ansibleplaybook/service_facts.json

@@ -1,0 +1,19 @@
+---
+- name: Gather Service Information and Save to CSV
+  hosts: tag_Os_ubuntu  # Define the target server or group in your inventory file
+  gather_facts: no  # Disable gathering facts, as we're not using them
+
+  tasks:
+    - name: Get list of all services and their statuses
+      systemd:
+        name: '*'
+      register: service_status_raw
+      changed_when: false  # Marking as unchanged because it doesn't modify the system
+
+    - name: Create CSV file with service information
+      csv_file:
+        path: service_status.csv
+        delimiter: ","
+        header: "Service,Status"
+        content: "{{ service_status_raw.results | json_query('[].name, [].result') | zip_longest('', fillvalue='N/A') | list }}"
+      delegate_to: localhost  # Run this task on the control machine

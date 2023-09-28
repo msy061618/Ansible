@@ -1,0 +1,13 @@
+---
+- name: Checking service status on all server
+  hosts: tag_Os_ubuntu
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: service facts
+      service_facts:
+    
+    - name: Display service facts
+      debug:
+        var: ansible_facts.services

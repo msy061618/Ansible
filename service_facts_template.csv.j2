@@ -1,0 +1,8 @@
+"Hostname","Service Name","Service State"
+{% for host, facts in ansible_facts.items() %}
+{% if 'services' in facts %}
+{% for service_name, service_info in facts.services.items() %}
+"{{ host }}","{{ service_name }}","{{ service_info.state }}"
+{% endfor %}
+{% endif %}
+{% endfor %}

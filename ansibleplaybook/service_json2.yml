@@ -1,0 +1,20 @@
+---
+- name: Gather Detailed Service Facts and Output as JSON
+  hosts: tag_Os_ubuntu  # This targets all servers in your inventory
+  gather_facts: yes  # Ensure that Ansible gathers facts
+  tasks:
+    - name: Create output directory
+      file:
+        path: /home/ubuntu/
+        state: directory
+      delegate_to: localhost  # Run this task on the control node
+
+    - name: Gather service facts with extended details
+      shell: "systemctl list-units --type=service --all --full --no-pager --plain --no-legend"
+      register: service_facts_result
+      changed_when: false
+
+    - name: Save service facts as JSON
+      copy:
+        content: "{{ service_facts_result.stdout_lines | to_json }}"
+        dest: /home/ubuntu/service_facts_details.json  # Update with your desired output path

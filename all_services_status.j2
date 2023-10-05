@@ -1,4 +1,4 @@
-Service Name, Status
-{% for service_name, service_info in service.items() %}
-{{ service_name }}, {{ service_info.state }}
+{% for host, facts in service_facts_result.results | dictsort %}
+"{{ host }}",{{ facts.services | to_nice_json }}
 {% endfor %}
+

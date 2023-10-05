@@ -1,0 +1,13 @@
+---
+- name: Gather Service Facts and Save as CSV
+  hosts: tag_Os_ubuntu
+  gather_facts: yes
+  tasks:
+    - name: Gather service facts
+      service_facts:
+      register: service_facts_result
+
+    - name: Save service facts as CSV
+      template:
+        src: /home/ubuntu/ansible/service_facts_template.csv.j2
+        dest: /home/ubuntu/service_facts.csv

@@ -1,0 +1,4 @@
+Hostname,Service,State
+{% for item in csv_data %}
+{{ item.Hostname }},{{ item.Service }},{{ item.Status }}
+{% endfor %}
